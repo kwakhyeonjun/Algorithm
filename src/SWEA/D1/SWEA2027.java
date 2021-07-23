@@ -1,0 +1,7 @@
+package SWEA.D1;
+
+public class SWEA2027 {
+    public static void main(String[] args) {
+        System.out.println("#++++\n+#+++\n++#++\n+++#+\n++++#");
+    }
+}
