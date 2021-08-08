@@ -1,6 +1,6 @@
-package AlgoStudy;
+package AlgoStudy.Week01;
 
-public class Programmers_weekly01 {
+public class Weekly01 {
     public static void main(String[] args) {
         System.out.println(solution(3, 20, 4));
     }

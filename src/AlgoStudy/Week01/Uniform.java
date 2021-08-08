@@ -1,6 +1,6 @@
-package AlgoStudy;
+package AlgoStudy.Week01;
 
-public class Programmers_uniform {
+public class Uniform {
     public static void main(String[] args) {
         System.out.println(solution(5, new int[]{2, 4}, new int[]{1, 3, 5})); // 5
         System.out.println(solution(5, new int[]{2, 4}, new int[]{3})); // 5

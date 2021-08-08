@@ -1,8 +1,8 @@
-package AlgoStudy;
+package AlgoStudy.Week01;
 
 import java.util.Arrays;
 
-public class Programmers_mockExam {
+public class MockExam {
     public static void main(String[] args) {
         int[] result = solution(new int[]{1,2,3,4,5});
         for(int i = 0; i <result.length; i++){
