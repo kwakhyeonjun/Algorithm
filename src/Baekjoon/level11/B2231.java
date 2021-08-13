@@ -5,6 +5,7 @@ import java.io.*;
 public class B2231 {
     private static int N;
     private static int length;
+    private static int cons;
     private static int min = Integer.MAX_VALUE;
     private static int[] result;
     private static int[] numbers = new int[10];
@@ -21,17 +22,13 @@ public class B2231 {
 
         comb(0, 0);
         if(min == Integer.MAX_VALUE) bw.write("0");
-        else bw.write(String.valueOf(min));
+        else bw.write(String.valueOf(cons));
         bw.flush();
         bw.close();
         br.close();
     }
     public static void comb(int count, int start){
         if(count == length){
-            for(int i = 0; i < length; i++){
-                System.out.print(result[i] + " ");
-            }
-            System.out.println();
             int sum = 0;
             int num = 0;
             for(int i = 0; i < length; i++){
@@ -39,9 +36,12 @@ public class B2231 {
                 num += result[i] * Math.pow(10, i);
             }
             sum += num;
-            if(sum == N && min > sum) min = sum;
+            if(sum == N && min > num) {
+                min = sum;
+                cons = num;
+            }
         }else{
-            for(int i = 0; i < length; i++){
+            for(int i = 0; i < 10; i++){
                 result[count] = numbers[i];
                 comb(count + 1, i + 1);
             }
