@@ -47,7 +47,6 @@ public class Toss_2 {
                 for(int i = 0; i < requestIdx; i++){
                     if(requests[i] == requests[requestIdx]) {
                         int server = requestInServer[i];
-//                        tempAnswer[server][serverAddIdx[server]++] = requests[requestIdx];
                         tempAnswer[server].add(requests[requestIdx]);
                         requestInServer[requestIdx] = server;
                         if(serverIdx == 0) serverIdx = servers - 1;
@@ -57,12 +56,10 @@ public class Toss_2 {
                     }
                 }
                 if(!isSticky) {
-//                    tempAnswer[serverIdx][serverAddIdx[serverIdx]++] = requests[requestIdx];
                     tempAnswer[serverIdx].add(requests[requestIdx]);
                     requestInServer[requestIdx] = serverIdx;
                 }
             }else{
-//                tempAnswer[serverIdx][serverAddIdx[serverIdx]++] = requests[requestIdx];
                 tempAnswer[serverIdx].add(requests[requestIdx]);
                 requestInServer[requestIdx] = serverIdx;
             }
