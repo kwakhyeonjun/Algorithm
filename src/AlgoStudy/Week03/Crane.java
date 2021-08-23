@@ -8,6 +8,7 @@ public class Crane {
     public static void main(String[] args) {
         System.out.println(solution(new int[][]{{0, 0, 1, 0, 0}, {0, 0, 1, 0, 0}, {0, 2, 1, 0, 0}, {0, 2, 1, 0, 0}, {0, 2, 1, 0, 0}}, new int[]{1, 2, 3, 3, 2, 3, 1}));
     }
+
     public static int solution(int[][] board, int[] moves) {
         int count = 0;
         Queue<Integer>[] map = new LinkedList[board[0].length];

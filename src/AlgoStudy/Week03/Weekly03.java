@@ -12,19 +12,31 @@ public class Weekly03 {
     public static void main(String[] args) {
         int result = solution(
                 new int[][]{
-                        {1,1,0,0,1,0},
-                        {0,0,1,0,1,0},
-                        {0,1,1,0,0,1},
-                        {1,1,0,1,1,1},
-                        {1,0,0,0,1,0},
-                        {0,1,1,1,0,0}},
+                        {0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0},
+                        {1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0},
+                        {0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0},
+                        {1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1},
+                        {0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0},
+                        {0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1},
+                        {0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0},
+                        {0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0},
+                        {1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0},
+                        {0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0},
+                        {0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1},
+                        {0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0}},
                 new int[][]{
-                        {1,0,0,1,1,0},
-                        {1,0,1,0,1,0},
-                        {0,1,1,0,1,1},
-                        {0,0,1,0,0,0},
-                        {1,1,0,1,1,0},
-                        {0,1,0,0,0,0}
+                        {1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1},
+                        {1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1},
+                        {1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0},
+                        {0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0},
+                        {1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0},
+                        {1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+                        {1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1},
+                        {1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1},
+                        {0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1},
+                        {1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1},
+                        {1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1},
+                        {1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1}
                 });
         System.out.println(result);
     }
@@ -44,26 +56,14 @@ public class Weekly03 {
             }
         }
 
-        // 블록 저장 테스트 - Test Done
-//        for(int i = 0; i < blocks.size(); i++){
-//            printBlock(blocks.get(i));
-//            System.out.println();
-//        }
-
         // game_board에서 비어있는 블록을 확인하면, 모든 블록들을 회전하면서 확인한다.
         for(int i = 0; i < game_board.length; i++){
             for(int j = 0; j < game_board[i].length; j++){
                 if(game_board[i][j] == 0){ // 비어있는 블록을 확인한 경우
                     block = new ArrayList<>();
                     findBlock(game_board, i, j, i, j, 0); // 현재 비어있는 블록을 찾음
-//                    printBlock(block);
-//                    System.out.println();
                     // 블록 리스트를 확인
                     for(int k = 0; k < blocks.size(); k++){
-//                        printBlock(block);
-//                        System.out.println();
-//                        printBlock(blocks.get(k));
-//                        System.out.println();
                         // 블록을 확인함
                         // 1. block 그대로
                         if(isEqual(block, blocks.get(k))){
@@ -71,28 +71,15 @@ public class Weekly03 {
                             blocks.remove(k);
                             break;
                         }
-                        // 2. 90도 회전 - j, i
-                        block = rotate90(block);
-                        if(isEqual(block, blocks.get(k))){
-                            sum += block.size();
-                            blocks.remove(k);
-                            break;
-                        }
 
-                        // 3. 180도 회전 - -i, -j
-                        block = rotate180(block);
-                        if(isEqual(block, blocks.get(k))){
-                            sum += block.size();
-                            blocks.remove(k);
-                            break;
-                        }
-
-                        // 4. 270도 회전 - -j, -i
-                        block = rotate270(block);
-                        if(isEqual(block, blocks.get(k))){
-                            sum += block.size();
-                            blocks.remove(k);
-                            break;
+                        // 2. 90도씩 회전시키면서 블록 확인
+                        for(int l = 0; l < 3; l++){
+                            List<int[]> newBlock = rotate90(blocks.get(k));
+                            if(isEqual(newBlock, block)){
+                                sum += newBlock.size();
+                                blocks.remove(k);
+                                break;
+                            }
                         }
                     }
                 }
@@ -104,15 +91,22 @@ public class Weekly03 {
 
     private static boolean isEqual(List<int[]> block1, List<int[]> block2){
         if(block1.size() != block2.size()) return false;
+        boolean[] isGot = new boolean[block1.size()];
         for(int i = 0; i < block1.size(); i++){
-            if(block1.get(i)[0] != block2.get(i)[0] || block1.get(i)[1] != block2.get(i)[1]) return false;
+            for(int j = 0; j < block2.size(); j++){
+                if(block1.get(i)[0] == block2.get(j)[0] && block1.get(i)[1] == block2.get(j)[1]) {
+                    isGot[i] = true;
+                    break;
+                }
+            }
+            if(!isGot[i]) return false;
         }
         return true;
     }
 
     /**
      * 블록을 90도 회전
-     * i = j, j = i
+     * i = j, j = -i
      * @param block
      * @return
      */
@@ -120,39 +114,41 @@ public class Weekly03 {
         List<int[]> rotateBlock = new ArrayList<>();
         for(int i = 0; i < block.size(); i++){
             int[] current = block.get(i);
-            rotateBlock.add(new int[]{current[1], current[0]});
+            rotateBlock.add(new int[]{current[1], (-1)*current[0]});
         }
-        return rotateBlock;
+        return setRotateBlock(rotateBlock);
     }
 
     /**
-     * 블록을 180도 회전
-     * i = -i
-     * j = -j
+     * 1. 제일 위에 있는 블록
+     * 2. 제일 위에 여러 블록이라면, 가장 왼쪽에 있는 블록
+     * 3. 이렇게 선택된 블록을 기준블록[0,0]으로 잡고, 블록의 상대위치를 다시 설정함.
      * @param block
      * @return
      */
-    private static List<int[]> rotate180(List<int[]> block){
-        List<int[]> rotateBlock = new ArrayList<>();
+    private static List<int[]> setRotateBlock(List<int[]> block){
+        int minX = Integer.MAX_VALUE;
+        int minY = Integer.MAX_VALUE;
+        int index = -1;
         for(int i = 0; i < block.size(); i++){
-            int[] current = block.get(i);
-            rotateBlock.add(new int[]{(-1)*current[0], (-1)*current[1]});
+            int[] one = block.get(i);
+            if(minX > one[0]){
+                minX = one[0];
+                index = i;
+            }
+            if(minX == one[0] && minY > one[1]){
+                minY = one[1];
+                index = i;
+            }
         }
-        return rotateBlock;
-    }
 
-    /**
-     *  블록을 270도 회전
-     *  i = -j
-     *  j = -i
-     */
-    private static List<int[]> rotate270(List<int[]> block){
-        List<int[]> rotateBlock = new ArrayList<>();
+        List<int[]> newBlock = new ArrayList<>();
+        int x = block.get(index)[0];
+        int y = block.get(index)[1];
         for(int i = 0; i < block.size(); i++){
-            int[] current = block.get(i);
-            rotateBlock.add(new int[]{(-1)*current[1], (-1)*current[0]});
+            newBlock.add(new int[]{block.get(i)[0] - x, block.get(i)[1] - y});
         }
-        return rotateBlock;
+        return newBlock;
     }
 
     private static void printBlock(List<int[]> block){
