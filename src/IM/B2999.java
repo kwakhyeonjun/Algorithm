@@ -16,16 +16,15 @@ public class B2999 {
         }
         char[][] matrix = new char[R][C];
         int idx = 0;
-        for(int i = 0; i < R; i++){
-            for(int j = 0; j < C; j++){
-                matrix[i][j] = input.charAt(idx++);
+        for(int i = 0; i < C; i++){
+            for(int j = 0; j < R; j++){
+                matrix[j][i] = input.charAt(idx++);
             }
         }
         for(int i = 0; i < R; i++){
             for(int j = 0; j < C; j++){
                 System.out.print(matrix[i][j]);
             }
-            System.out.println();
         }
     }
 }
