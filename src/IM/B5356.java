@@ -2,25 +2,25 @@ package IM;
 
 import java.io.*;
 
-public class SWEA4789 {
+public class B5356 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int T = Integer.parseInt(br.readLine());
         for(int test_case = 1; test_case <= T; test_case++){
-            String input = br.readLine();
-            int count = 0;
-            int sum = 0;
-            for(int i = 0; i < input.length(); i++){
-                int current = input.charAt(i) - '0';
-                if(i > sum){
-                    count += i - sum;
-                    sum = i;
-                }
-                    sum += current;
+            bw.write("#" + test_case+ " ");
+            String[] input = new String[5];
+            for(int t = 0; t < 5; t++){
+                input[t] = br.readLine();
             }
-
-            bw.write("#" + test_case + " " + count + "\n");
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < 15; i++){
+                for(int j = 0; j < 5; j++){
+                    if(input[j].length() <= i) continue;
+                    sb.append(input[j].charAt(i));
+                }
+            }
+            bw.write(sb +"\n");
         }
         bw.flush();
         bw.close();
