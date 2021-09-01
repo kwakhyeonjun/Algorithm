@@ -1,51 +1,44 @@
 package Baekjoon.Grade.Silver;
 
 import java.io.*;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class B1010 {
-    private static int N, M, tot;
-
+    static int[][] dp = new int[30][30];
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        Scanner in = new Scanner(System.in);
 
-        int T = Integer.parseInt(br.readLine());
-        for(int test_case = 1; test_case <= T; test_case++){
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            N = Integer.parseInt(st.nextToken());
-            M = Integer.parseInt(st.nextToken());
-            tot = 0;
+        int T = in.nextInt();
 
-            comb(0, 0);
+        StringBuilder sb = new StringBuilder();
 
-//            long up = 1;
-//            for(int i = M-N+1; i <= M; i++){
-//                up *= i;
-//            }
-//            long down = 1;
-//            for(int i = 1; i <= N; i++){
-//                down *= i;
-//            }
-//            bw.write(up/down + "\n");
+        for(int i = 0; i < T; i++) {
 
-            bw.write(tot + "\n");
+            // M개중 N개를 뽑는 경우이므로 nCr 에서 n = M, r = N이다.
+            int N = in.nextInt();	// N = r
+            int M = in.nextInt();	// M = n
+
+            sb.append(combi(M, N)).append('\n');
         }
-        bw.flush();
-        bw.close();
-        br.close();
+
+        System.out.println(sb);
+
     }
 
+    static int combi(int n, int r) {
 
-
-    private static void comb(int start, int count){
-        if(count == N){
-            tot++;
-            return;
-        }else{
-            for(int i = start; i < M; i++){
-                comb(i + 1, count + 1);
-            }
+        // 이미 풀린 경우 바로 반환
+        if(dp[n][r] > 0) {
+            return dp[n][r];
         }
+
+        // 2번 성질
+        if(n == r || r == 0) {
+            return dp[n][r] = 1;
+        }
+
+        // 1번 성질
+        return dp[n][r] = combi(n - 1, r - 1) + combi(n - 1, r);
     }
 }
