@@ -17,7 +17,7 @@ public class B1010 {
             M = Integer.parseInt(st.nextToken());
             tot = 0;
 
-            comb(0, 0);
+//            comb(0, 0);
 
 //            long up = 1;
 //            for(int i = M-N+1; i <= M; i++){
