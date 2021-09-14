@@ -15,9 +15,7 @@ public class ColoringBook {
         int numberOfArea = 0;
         int maxSizeOfOneArea = 0;
 
-
         boolean[][] visited = new boolean[m][n];
-
 
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
@@ -33,8 +31,6 @@ public class ColoringBook {
         answer[1] = maxSizeOfOneArea;
         return answer;
     }
-
-
 
     private static int[][] dir = {{0, 1}, {-1, 0}, {0, -1}, {1, 0}}; // 우 하 좌 상
     public static int bfs(int[][] picture, boolean[][] visited, int x, int y){
