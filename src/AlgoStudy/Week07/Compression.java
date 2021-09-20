@@ -29,11 +29,11 @@ public class Compression {
                     i += length - 1;
                     count++;
                     System.out.println(count + cur);
-                }else{
-                    if(count == 1) comp += cur;
+                }else {
+                    if (count == 1) comp += cur;
                     else comp += count + cur;
-                    
-
+                    count = 1;
+                }
             }
             System.out.println(comp);
             if(comp.isBlank()) continue;
