@@ -36,7 +36,7 @@ public class Compression {
                 }
             }
             System.out.println(comp);
-            if(comp.isBlank()) continue;
+//            if(comp.isBlank()) continue;
             answer = Math.min(answer, comp.length());
         }
         return answer;
