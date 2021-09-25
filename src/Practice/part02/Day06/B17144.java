@@ -31,14 +31,18 @@ public class B17144 {
             }
         }
 
-        visited = new boolean[R][C];
 
         for (int t = 0; t < T; t++) {
+            int[][] tempMap = new int[R][C];
+            for (int i = 0; i < 2; i++) {
+                tempMap[airCleaner[i][0]][airCleaner[i][1]] = -1;
+            }
             for (int i = 0; i < R; i++) {
                 for (int j = 0; j < C; j++) {
-                    if(map[i][j] > 0) moveDust(i, j);
+                    if(map[i][j] > 0) moveDust(tempMap, i, j);
                 }
             }
+            map = tempMap;
             moveAirCleaner();
         }
 
@@ -50,11 +54,14 @@ public class B17144 {
         }
 
         System.out.println(answer);
+        br.close();
     }
+
 
     private static int[][] airDir = {{3, 0, 2, 1}, {2, 0, 3, 1}};
     private static void moveAirCleaner(){
         for(int cleanerIdx = 0; cleanerIdx < 2; cleanerIdx++){
+            boolean isSameX = false;
             int[] cur = airCleaner[cleanerIdx];
             int x = cur[0];
             int y = cur[1];
@@ -62,8 +69,13 @@ public class B17144 {
             while(true){
                 int nx = x + dir[airDir[cleanerIdx][dirIdx]][0];
                 int ny = y + dir[airDir[cleanerIdx][dirIdx]][1];
-                if(!isInMap(nx, ny) || (nx == cur[0] && ny == C - 1)){
+                if(!isInMap(nx, ny)){
                     dirIdx++;
+                    continue;
+                }
+                if(!isSameX && x == cur[0] && y == C - 1){
+                    dirIdx++;
+                    isSameX = true;
                     continue;
                 }
                 if(nx == cur[0] && ny == cur[1]) break;
@@ -74,22 +86,24 @@ public class B17144 {
                 x = nx;
                 y = ny;
             }
+            map[x][y] = 0;
         }
     }
 
     private static boolean[][] visited;
 
-    private static void moveDust(int x, int y){
+    private static void moveDust(int[][] tempMap, int x, int y){
         int diffusionCount = 0;
         for(int i = 0; i < 4; i++){
             int nx = x + dir[i][0];
             int ny = y + dir[i][1];
             if(!isInMap(nx, ny)) continue;
             if(map[nx][ny] < 0) continue;
-            map[nx][ny] += map[x][y]/5;
+
+            tempMap[nx][ny] += map[x][y]/5;
             diffusionCount++;
         }
-        map[x][y] -= (map[x][y]/5) * diffusionCount;
+        tempMap[x][y] += map[x][y] - (map[x][y]/5) * diffusionCount;
     }
 
     private static boolean isInMap(int x, int y){
