@@ -3,8 +3,8 @@ package AlgoStudy.Week08;
 public class MatrixRotate {
     public static void main(String[] args) {
         MatrixRotate sol = new MatrixRotate();
-        int[][] queries = {{2, 2, 5, 4}, {3, 3, 6, 6}, {5, 1, 6, 3}};
-        int[] res = sol.solution(6, 6, queries);
+        int[][] queries = {{1, 1, 2, 2}, {1, 2, 2, 3}, {2, 1, 3, 2}, {2, 2, 3, 3}};
+        int[] res = sol.solution(3, 3, queries);
         for(int v : res){
             System.out.println(v + " ");
         }
@@ -35,21 +35,33 @@ public class MatrixRotate {
         int endX = query[2]-1;
         int endY = query[3]-1;
 
-        int min = Integer.MAX_VALUE;
         int x = startX;
         int y = startY;
+        int min = map[x][y];
         int curDir = 0;
-        while(curDir < 4){
+        int xCount = 1, yCount = 1;
+
+        while(true){
             int nx = x + dir[curDir][0];
             int ny = y + dir[curDir][1];
+
+            if(nx == startX && ny == startY) break;
 
             swap(map, x, y, nx, ny);
             min = Math.min(min, map[x][y]);
 
+            if(curDir == 1 || curDir == 3){
+                yCount++;
+            }else{
+                xCount++;
+            }
+
             // 주어진 범위의 끝에 도달한 경우
-            if((nx != startX && ny == endY) ||
-                (nx == endX && ny == 0)
-            ) curDir++;
+            if(xCount == endX - startX + 1 || yCount == endY - startY + 1) {
+                xCount = 1;
+                yCount = 1;
+                curDir++;
+            }
 
             x = nx;
             y = ny;
