@@ -35,6 +35,9 @@ public class B1931 {
             int start = rooms[i][0];
             int end = rooms[i][1];
 
+            for (int j = 0; j < N; j++) {
+
+            }
         }
     }
 }
