@@ -1,6 +1,11 @@
 package AlgoStudy.Week09;
 
 public class IntSum {
+    public static void main(String[] args) {
+        IntSum sol = new IntSum();
+
+    }
+
     public long solution(int a, int b) {
         long answer = 0;
         int min = Math.min(a, b);
