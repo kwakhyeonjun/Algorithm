@@ -20,8 +20,6 @@ public class B1541 {
             else{
                 if(operand == '0') answer += Integer.parseInt(sb.toString());
                 if(operand == '-') minus = true;
-                //TODO : 암만 그래도 좀 해야 한다고 봐...
-                if()
                 operand = s.charAt(i);
                 if(minus) answer -= Integer.parseInt(sb.toString());
                 sb = new StringBuilder();
