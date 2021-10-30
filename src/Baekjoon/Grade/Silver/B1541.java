@@ -18,11 +18,12 @@ public class B1541 {
         for(int i = 0; i < s.length(); i++){
             if(s.charAt(i) >= '0' && s.charAt(i) <= '9') sb.append(s.charAt(i));
             else{
-                if(operand == '0') answer += Integer.parseInt(sb.toString());
                 if(operand == '-') minus = true;
-                operand = s.charAt(i);
                 if(minus) answer -= Integer.parseInt(sb.toString());
+                else answer += Integer.parseInt(sb.toString());
                 sb = new StringBuilder();
+                operand = s.charAt(i);
+                if(operand == '-') minus = true;
             }
         }
         if(minus) answer -= Integer.parseInt(sb.toString());
