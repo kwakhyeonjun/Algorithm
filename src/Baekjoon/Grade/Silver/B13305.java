@@ -21,22 +21,20 @@ public class B13305 {
         for(int i = 0; i < N; i++){
             prices[i] = Integer.parseInt(st.nextToken());
         }
-        int i = 1;
-        int pivot = 0;
-        int answer = 0;
-        int sum = 0;
-        while(i < N){
-            if(prices[pivot] <= prices[i]){
-                sum += dist[i-1];
-                i++;
-            }else {
-                answer += prices[pivot] * sum;
-                sum = 0;
-                pivot = i;
-                i++;
+
+        long answer = 0;
+        int pivot = prices[0];
+        int totDist = 0;
+        for(int i = 1; i < prices.length; i++){
+            if(i == prices.length - 1 || pivot > prices[i]){
+                totDist += dist[i-1];
+                answer += (long) totDist * pivot;
+                totDist = 0;
+                pivot = prices[i];
+            }else{
+                totDist += dist[i-1];
             }
         }
-        answer += prices[pivot] * sum;
         System.out.println(answer);
     }
 }
