@@ -21,6 +21,8 @@ public class B1339 {
                 return o2.length() - o1.length();
             }
         });
+        for(int i = 0; i < N; i++){
 
+        }
     }
 }
