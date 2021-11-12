@@ -22,7 +22,7 @@ public class B1339 {
             }
         });
         for(int i = 0; i < N; i++){
-
+            if()
         }
     }
 }
