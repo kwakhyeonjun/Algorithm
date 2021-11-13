@@ -21,8 +21,11 @@ public class B1339 {
                 return o2.length() - o1.length();
             }
         });
+        String current = null;
+        String next = null;
         for(int i = 0; i < N; i++){
-            if()
+            current = input[i];
+
         }
     }
 }
