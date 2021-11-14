@@ -25,7 +25,8 @@ public class B1339 {
         String next = null;
         for(int i = 0; i < N; i++){
             current = input[i];
-
+            next = input[i+1];
+            
         }
     }
 }
