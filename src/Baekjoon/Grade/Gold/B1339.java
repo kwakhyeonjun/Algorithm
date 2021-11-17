@@ -27,7 +27,6 @@ public class B1339 {
             current = input[i];
             next = input[i+1];
 
-            if()
         }
     }
 }
