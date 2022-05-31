@@ -12,17 +12,16 @@ public class SWEA1288 {
         for(int test_case = 1; test_case <= T; test_case++){
             int N = Integer.parseInt(br.readLine());
             nums = new boolean[10];
+            int cur = N;
             while(true){
-                String temp = String.valueOf(N);
+                String temp = String.valueOf(cur);
                 for(int i = 0; i < temp.length(); i++){
                     nums[temp.charAt(i) - '0'] = true;
                 }
                 if(isAllCount()) break;
-                else{
-                    N *= 2;
-                }
+                cur += N;
             }
-            bw.write("#" + test_case + " " + N + "\n");
+            bw.write("#" + test_case + " " + cur + "\n");
         }
         bw.flush();
         bw.close();
