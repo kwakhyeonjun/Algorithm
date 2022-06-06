@@ -1,6 +1,6 @@
 package Programmers.Level2;
 
-import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 //
 public class MoreHot {
@@ -13,17 +13,21 @@ public class MoreHot {
     }
     public int solution(int[] scoville, int K) {
         int answer = 0;
-        ArrayList<Integer> scoList = new ArrayList<>();
-        for (int i = 0; i < scoville.length; i++) {
-            scoList.add(scoville[i]);
+        PriorityQueue<Integer> pq = new PriorityQueue();
+        for(int s : scoville) {
+            pq.add(s);
         }
-        while(scoList.get(0) < K){
+
+        while(pq.peek() < K) {
+            if(pq.size() == 1) return -1;
+            int min1 = pq.poll();
+            int min2 = pq.poll();
+
+            int mix = min1 + (2 * min2);
+            pq.add(mix);
             answer++;
-            int sum = scoList.get(0) + (2 * scoList.get(1));
-            scoList.remove(0);
-            scoList.remove(1);
-            scoList.add(sum);
         }
+
         return answer;
     }
 }
