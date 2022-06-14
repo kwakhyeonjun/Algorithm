@@ -1,27 +1,46 @@
 package Programmers.Level2;
 
-import java.util.Stack;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class TruckOnBridge {
     public static void main(String[] args) {
         TruckOnBridge sol = new TruckOnBridge();
-        int b = 2;
-        int w = 10;
-        int[] t = {7,4,5,6};
+        int b = 100;
+        int w = 100;
+        int[] t = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
         System.out.println(sol.solution(b, w, t));
     }
 
     public int solution(int bridge_length, int weight, int[] truck_weights) {
-        int answer = 1;
+        int answer = 0;
 
-        Stack<Integer> stack = new Stack<>();
-        int curWeight = 0;
-        for (int i = 0; i < truck_weights.length; i++) {
-            if(curWeight > weight) answer += bridge_length;
-
-            curWeight += truck_weights[i];
-            stack.push(truck_weights[i]);
+        Queue<Integer> queue = new LinkedList<>();
+        int sum = 0;
+        for(int truck : truck_weights) {
+            while(true) {
+                if(queue.isEmpty()) {
+                    queue.offer(truck);
+                    sum += truck;
+                    answer++;
+                    break;
+                } else if(queue.size() == bridge_length) {
+                    sum -= queue.poll();
+                } else {
+                    if(sum + truck > weight) {
+                        queue.offer(0);
+                        answer++;
+                    } else {
+                        queue.offer(truck);
+                        sum += truck;
+                        answer++;
+                        break;
+                    }
+                }
+            }
         }
+        answer += bridge_length;
 
         return answer;
     }
