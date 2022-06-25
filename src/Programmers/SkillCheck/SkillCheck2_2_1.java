@@ -1,4 +1,4 @@
-package Programmers;
+package Programmers.SkillCheck;
 
 
 public class SkillCheck2_2_1 {
