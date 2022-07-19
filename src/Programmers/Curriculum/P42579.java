@@ -4,7 +4,11 @@ import java.util.*;
 
 public class P42579 {
     public static void main(String[] args) {
-
+        P42579 sol = new P42579();
+        int[] answer = sol.solution(new String[]{"classic", "pop", "classic", "classic", "pop"}, new int[]{500, 600, 150, 800, 2500});
+        for(int i = 0; i < answer.length; i++) {
+            System.out.println(answer[i]);
+        }
     }
 
     /**
@@ -15,20 +19,42 @@ public class P42579 {
      * 3. 장르 내에서 재생 횟수가 같은 노래 중에서 고유번호가 낮은 노래를 먼저 수록
      */
     public int[] solution(String[] genres, int[] plays) {
-        int[] answer = {};
 
         HashMap<String, Genre> map = new HashMap<>();
 
         for(int i = 0; i < genres.length; i++) {
-            if(map.containsKey(genres[i])) {
+            if(!map.containsKey(genres[i])) {
                 map.put(genres[i], new Genre());
             }
             map.get(genres[i]).totCount += plays[i];
             map.get(genres[i]).songs.add(new Song(i, plays[i]));
         }
 
-        for(String key : map.keySet()) {
-            Collections.sort(map.get(key).songs);
+        List<Integer> answerList = new ArrayList<>();
+
+        while(!map.isEmpty()) {
+            int max = Integer.MIN_VALUE;
+            String maxKey = null;
+            for(String key : map.keySet()) {
+                if(max < map.get(key).totCount) {
+                    max = map.get(key).totCount;
+                    maxKey = key;
+                }
+            }
+
+            List<Song> songs = map.get(maxKey).songs;
+            Collections.sort(songs);
+            for (int i = 0; i < 2; i++) {
+                if(songs.size() <= i) break;
+                answerList.add(songs.get(i).number);
+            }
+            map.remove(maxKey);
+        }
+
+        int[] answer = new int[answerList.size()];
+
+        for(int i = 0; i < answerList.size(); i++) {
+            answer[i] = answerList.get(i);
         }
 
         return answer;
@@ -48,7 +74,7 @@ public class P42579 {
             if(this.count == o.count) {
                 return this.number - o.number;
             }
-            return this.count - o.count;
+            return o.count - this.count;
         }
     }
 
