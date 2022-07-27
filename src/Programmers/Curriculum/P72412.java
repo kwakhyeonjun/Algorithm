@@ -1,6 +1,9 @@
 package Programmers.Curriculum;
 
+import AlgoStudy.Week05.map;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,6 +34,10 @@ public class P72412 {
             makeString(i, 0, "");
         }
 
+        for(String key : map.keySet()) {
+            Collections.sort(map.get(key));
+        }
+
         for(int i = 0; i < queries.length; i++) {
             StringBuilder cur = new StringBuilder();
             for(int j = 0; j < 3; j++) {
@@ -39,11 +46,10 @@ public class P72412 {
             String[] temp = queries[i][3].split(" ");
             cur.append(temp[0]);
 
-            int queryValue = Integer.parseInt(temp[1]);
+            int queryScore = Integer.parseInt(temp[1]);
             if(!map.containsKey(cur.toString())) continue;
-            for(int val : map.get(cur.toString())) {
-                if(val >= queryValue) answer[i]++;
-            }
+            List<Integer> scores = map.get(cur.toString());
+            answer[i] += binarySearch(scores, queryScore);
         }
 
         return answer;
@@ -60,5 +66,17 @@ public class P72412 {
         }
         makeString(info, idx + 1, str + info[idx]);
         makeString(info, idx + 1, str + "-");
+    }
+
+    private int binarySearch(List<Integer> scores, int targetScore) {
+        int start = 0, end = scores.size() - 1;
+        while(start <= end) {
+            int mid = (start + end) / 2;
+            if(scores.get(mid) < targetScore)
+                start = mid + 1;
+            else
+                end = mid - 1;
+        }
+        return scores.size() - start;
     }
 }
