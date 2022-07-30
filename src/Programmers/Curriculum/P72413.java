@@ -5,69 +5,80 @@ import java.util.*;
 public class P72413 {
 
     public static void main(String[] args) {
-
+        int n = 6;
+        int s = 4;
+        int a = 6;
+        int b = 2;
+        int[][] fares = {{4, 1, 10}, {3, 5, 24}, {5, 6, 2}, {3, 1, 41}, {5, 1, 24}, {4, 6, 50}, {2, 4, 66}, {2, 3, 22}, {1, 6, 25}};
+        P72413 sol = new P72413();
+        System.out.println(sol.solution(n, s, a, b, fares));
     }
 
-    // bfs에서 두개를 같이 돌릴 수 있나??
     public int solution(int n, int s, int a, int b, int[][] fares) {
-        int answer = 0;
+        int answer = Integer.MAX_VALUE;
+        s--;
+        a--;
+        b--;
 
-        visitedA = new boolean[fares.length][fares[0].length];
-        visitedB = new boolean[fares.length][fares[0].length];
-        min = Integer.MAX_VALUE;
+        int[][] map = new int[n][n];
+
+        for(int i = 0; i < n; i++) {
+            for(int j = 0 ; j < n; j++) {
+                map[i][j] = Integer.MAX_VALUE;
+            }
+        }
+
+        for(int i = 0; i < fares.length; i++) {
+            map[fares[i][0] - 1][fares[i][1] - 1] = fares[i][2];
+            map[fares[i][1] - 1][fares[i][0] - 1] = fares[i][2];
+        }
+
+        int[][] dist = new int[n][n];
+
+        for(int i = 0; i < n; i++) {
+            dist[i] = dijkstra(map, i);
+        }
+
+        for(int i = 0; i < n; i++) {
+            answer = Math.min(answer, dist[s][i] + dist[i][a] + dist[i][b]);
+        }
 
         return answer;
     }
 
-    private boolean[][] visitedA, visitedB;
-    private int min;
+    private int[] dijkstra(int[][] map, int from) {
+        int n = map.length;
+        int[] dist = new int[n];
+        boolean[] visited = new boolean[n];
 
-    private void bfs(int[][] fares, int start, int a, int b) {
-        Queue<Pos> queue = new LinkedList<>();
-        queue.add(new Pos(start, start));
+        for(int i = 0; i < n; i++) {
+            dist[i] = map[from][i];
+        }
 
-        while(!queue.isEmpty()) {
-            Pos cur = queue.poll();
-            if(cur.a == a && cur.b == b) {
-                // 둘 다 도착한 경우
-                min = Math.min(min, cur.min);
-                continue;
-            }
-            if(cur.a != a) {
-                for(int i = 0; i < fares[cur.a].length; i++) {
-                    if(visitedA[cur.a][i]) continue;
-                    visitedA[cur.a][i] = true;
-//                    queue.add(new Pos(i, cur.a, ));
+        dist[from] = 0;
+        visited[from] = true;
+
+        for(int t = 0; t < n - 2; t++) {
+            int min = Integer.MAX_VALUE;
+            int idx = -1;
+
+            // find min
+            for(int i = 0; i < n ;i++) {
+                if(visited[i]) continue;
+                if(min > dist[i]){
+                    min = dist[i];
+                    idx = i;
                 }
             }
-            if(cur.b != b) {
 
+            if(idx == -1) break;
+            visited[idx] = true;
+
+            for(int i = 0; i < n; i++) {
+                if(visited[i] || Integer.MAX_VALUE == map[idx][i]) continue;
+                dist[i] = Math.min(dist[i], dist[idx] + map[idx][i]);
             }
-
         }
-    }
-
-    private class Pos{
-        int a;
-        int prevA;
-        int b;
-        int prevB;
-        int min;
-
-        Pos(){}
-
-        public Pos(int a, int b) {
-            this.a = a;
-            this.b = b;
-            min = Integer.MAX_VALUE;
-        }
-
-        public Pos(int a, int prevA, int b, int prevB, int min) {
-            this.a = a;
-            this.prevA = prevA;
-            this.b = b;
-            this.prevB = prevB;
-            this.min = min;
-        }
+        return dist;
     }
 }
