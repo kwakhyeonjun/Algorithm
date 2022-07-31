@@ -12,7 +12,7 @@ public class P42627 {
         System.out.println(sol.solution(jobs));
     }
 
-    public int solution(int[][] jobs) {
+    public int solution01(int[][] jobs) {
 
         int answer = 0;
         int end = 0; // 수행되고난 직후의 시간
@@ -49,5 +49,13 @@ public class P42627 {
         }
 
         return (int) Math.floor(answer / (double)jobs.length);
+    }
+
+    public int solution(int[][] jobs) {
+        int answer = 0;
+
+
+
+        return answer;
     }
 }
