@@ -1,4 +1,4 @@
-package codetree;
+package Codetree;
 
 import java.io.BufferedReader;
 import java.io.IOException;
