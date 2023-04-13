@@ -4,8 +4,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class P159993 {
+    public static void main(String[] args) {
+        P159993 sol = new P159993();
+        sol.solution(new String[]{"SOOOL", "XXXXO", "OOOOO", "OXXXX", "OOOOE"});
+    }
+
     public int solution(String[] maps) {
-        int answer = 0;
 
         n = maps.length;
         m = maps[0].length();
@@ -34,10 +38,10 @@ public class P159993 {
     private int bfs(int[] start, int[] end) {
         Queue<int[]> queue = new LinkedList<>();
         queue.add(new int[]{start[0], start[1], 0});
+        visited[start[0]][start[1]] = true;
 
         while (!queue.isEmpty()) {
             int[] cur = queue.poll();
-            visited[cur[0]][cur[1]] = true;
 
             for (int[] d : dir) {
                 int nx = cur[0] + d[0];
@@ -50,6 +54,7 @@ public class P159993 {
                 if(nx == end[0] && ny == end[1]) return cur[2] + 1;
 
                 queue.add(new int[]{nx, ny, cur[2] + 1});
+                visited[nx][ny] = true;
             }
         }
         return -1;
