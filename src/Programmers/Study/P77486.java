@@ -1,9 +1,10 @@
 package Programmers.Study;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class P77486 {
-    public int[] solution(String[] enroll, String[] referral, String[] seller, int[] amount) {
+    public int[] solution(String[] enroll, String[] referral, String[] seller, int[] amount) throws IOException {
 
         int n = enroll.length;
         answer = new int[n];
