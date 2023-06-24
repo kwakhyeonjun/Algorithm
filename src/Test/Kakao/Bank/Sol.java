@@ -6,9 +6,9 @@ public class Sol {
     public static void main(String[] args) {
         Sol sol = new Sol();
         int[][] jobs = {{1, 5, 2, 3}, {2, 2, 3, 2}, {3, 1, 3, 3}, {5, 2, 1, 5}, {7, 1, 1, 1}, {9, 1, 1, 1}, {10, 2, 2, 9}};
-        System.out.println(Arrays.toString(sol.solution(jobs)));
+//        System.out.println(Arrays.toString(sol.solution(jobs)));
     }
-
+//
     public int[] solution(int[][] jobs) {
         List<Integer> answerList = new ArrayList<>();
         Queue<int[]> jobQueue = new LinkedList<>(Arrays.asList(jobs));
@@ -96,11 +96,11 @@ public class Sol {
     }
 
 //    public int[] solution(int[][] jobs) {
-//        /*
-//            1. 같은 분류 방식이라면 모드 끝마칠 때 까지 작업 처리
-//            2. 처리하는 도중이나 처리가 끝남과 동시에 같은 분류의 작업이 새로 요청되면 이어서 처리
-//            3. 한 분류에 속하는 모든 작업을 끝내면 계속해서 다른 분류 중 작업의 중요도 합이 가장 높은 분류를 선택하여 처리
-//         */
+//       /*
+//           1. 같은 분류 방식이라면 모드 끝마칠 때 까지 작업 처리
+//           2. 처리하는 도중이나 처리가 끝남과 동시에 같은 분류의 작업이 새로 요청되면 이어서 처리
+//           3. 한 분류에 속하는 모든 작업을 끝내면 계속해서 다른 분류 중 작업의 중요도 합이 가장 높은 분류를 선택하여 처리
+//        */
 //        List<Integer> answerList = new ArrayList<>();
 //        Queue<Job> queue = new LinkedList<>();
 //        Map<Integer, Integer> map = new HashMap<>();
