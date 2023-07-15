@@ -7,8 +7,6 @@ public class P12971 {
         System.out.println(answer);
     }
     public int solution(int[] sticker) {
-        int answer = 0;
-
         int n = sticker.length;
 
         if(n == 1) return sticker[0];
