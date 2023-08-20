@@ -1,10 +1,10 @@
-package Codetree;
+package Codetree.SE2017.am;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class CT20170101 {
+public class SE2017AM01 {
     private static final int MAX_N = 202, MAX_M = 202;
 
     public static void main(String[] args) throws IOException {
