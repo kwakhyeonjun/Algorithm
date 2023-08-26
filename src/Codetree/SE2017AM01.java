@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class SE2017PM01 {
+public class SE2017AM01 {
     private static final int MAX_N = 11;
     private static int n, max = -1_000_000_000, min = 1_000_000_000;
     private static final int[] num = new int[MAX_N];
